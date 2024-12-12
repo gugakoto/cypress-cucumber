@@ -38,12 +38,37 @@ Cypress.Commands.add('validaCart', (linha, prod, color, qtdd, preco) => {
         cy.wrap($row).find('td:eq(5)').should('contain', preco)
     })
 });
+Cypress.Commands.add('createAdmin', () => {
+
+    cy.request({
+        method: 'POST',
+        url: `https://www.advantageonlineshopping.com/accountservice/accountrest/api/v1/register`,
+        body: {
+            "accountType": "ADMIN",
+            "address": "string",
+            "allowOffersPromotion": true,
+            "aobUser": true,
+            "cityName": "string",
+            "country": "AUSTRALIA_AU",
+            "email": "test@test.com",
+            "firstName": "string",
+            "lastName": "string",
+            "loginName": "admintest2",
+            "password": "Password123",
+            "phoneNumber": "string",
+            "stateProvince": "string",
+            "zipcode": "string"
+          }
+    })
+
+});
 Cypress.Commands.add('loginAPI', () => {
 
     cy.request({
         method: 'POST',
         url: `https://www.advantageonlineshopping.com/accountservice/accountrest/api/v1/login`,
         body: {
+            "email": "test@test.com",
             "loginPassword": "Password123",
             "loginUser": "admintest2"
         }
@@ -103,6 +128,7 @@ const imagem = 'caixa.jpg';
 Cypress.Commands.add('alteraFotoAPI', (novoprodID, token, userID, source) => {
 
     cy.fixture(imagem, 'binary').then((imagemBuffer) => {
+        
         const blob = new Blob([imagemBuffer], { type: 'image/jpeg' });
         const formData = new FormData();
         formData.append('file', blob, imagem);
@@ -149,12 +175,11 @@ Cypress.Commands.add('fillUpCart', (prod1, prod2, prod3) => {
 Cypress.Commands.add('allProdAPI', () => {
 
     cy.request({
-        method: 'POST',
-        url: `https://www.advantageonlineshopping.com/catalog/api/v1/products`,
+        method: 'GET',
+        url: '/catalog/api/v1/products',
         failOnStatusCode: false,
     }).then((response)=>{
         expect(response.status).to.eq(200);
-        expect(response.body).should('have.property', 'productId');
     });
 
 });

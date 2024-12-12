@@ -2,16 +2,16 @@ Este projeto utiliza Cypress e Mocha para realizar testes automatizados em uma a
 
 Pré-requisitos
 
-- Node.js (versão 14 ou superior)
-- npm (versão 7 ou superior)
-- Cypress (versão 10 ou superior)
-- Cucumber (versão 9 ou superior)
+- Node.js 
+- npm 
+- Cypress 
+- Cucumber Preprocessor 
 
 Instalação
 
 1. Instale as dependências: npm install
 2. Instale o Cypress: npm cypress install
-3. Instale o cucumber: npm install cypress-cucumber-preprocessor
+3. Instale o cucumber: npm i @badeball/cypress-cucumber-preprocessor
 
 
 Execução dos Testes
